@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Admin - Control de Obra</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+
+  <div id="screen-setup" class="screen center-screen hidden">
+    <p class="eyebrow">Configuración inicial</p>
+    <h1>Conectar con tu backend</h1>
+    <p class="desc">Pega aquí la URL de tu Google Apps Script Web App (la que termina en /exec).</p>
+    <div class="field">
+      <label>URL del backend</label>
+      <input type="url" id="input-backend-url" placeholder="https://script.google.com/macros/s/.../exec">
+    </div>
+    <button class="btn-primary" id="btn-save-backend">Guardar y continuar</button>
+    <div class="error-msg" id="setup-error"></div>
+  </div>
+
+  <div id="screen-admin" class="screen center-screen hidden">
+    <p class="eyebrow">Solo administrador</p>
+    <h1>Crear proyecto nuevo</h1>
+    <p class="desc">Esto duplica tu Sheet Maestro automáticamente y lo deja listo para usar - no necesitas tocar Drive.</p>
+    <div class="field">
+      <label>Nombre del proyecto</label>
+      <input type="text" id="input-nombre-proyecto" placeholder="Ej. Impermeabilización Edificio ABC">
+    </div>
+    <div class="field">
+      <label>Clave de administrador</label>
+      <input type="password" id="input-clave">
+    </div>
+    <button class="btn-primary" id="btn-crear">Crear proyecto</button>
+    <div class="error-msg" id="admin-error"></div>
+    <div id="admin-success" class="hidden" style="margin-top:18px; background:rgba(255,255,255,0.1); border-radius:10px; padding:14px;">
+      <p style="color:white; font-size:14px; margin:0 0 8px;">✅ Proyecto creado.</p>
+      <a id="link-nuevo-sheet" href="#" target="_blank" class="btn-secondary" style="display:block; text-align:center; text-decoration:none; background:white;">Abrir el Sheet nuevo</a>
+    </div>
+    <button class="btn-secondary" id="btn-change-backend" style="margin-top:24px;">Cambiar URL del backend</button>
+  </div>
+
+</div>
+<div id="toast" class="toast"></div>
+<script src="admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Control de Obra</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#2B4570">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+
+  <!-- PANTALLA 1: Configuracion (solo primera vez) -->
+  <div id="screen-setup" class="screen center-screen hidden">
+    <p class="eyebrow">Configuración inicial</p>
+    <h1>Conectar con tu backend</h1>
+    <p class="desc">Pega aquí la URL de tu Google Apps Script Web App (la que termina en /exec). Solo se hace una vez por celular.</p>
+    <div class="field">
+      <label>URL del backend</label>
+      <input type="url" id="input-backend-url" placeholder="https://script.google.com/macros/s/.../exec">
+    </div>
+    <button class="btn-primary" id="btn-save-backend">Guardar y continuar</button>
+    <div class="error-msg" id="setup-error"></div>
+  </div>
+
+  <!-- PANTALLA 2: Login (proyecto + nombre) -->
+  <div id="screen-login" class="screen center-screen hidden">
+    <p class="eyebrow">Control de Obra</p>
+    <h1>Identifícate</h1>
+    <p class="desc">Selecciona el proyecto y tu nombre para continuar.</p>
+    <div class="field">
+      <label>Proyecto</label>
+      <select id="select-proyecto"></select>
+    </div>
+    <div class="field">
+      <label>Tu nombre</label>
+      <select id="select-nombre"><option value="">Selecciona un proyecto primero</option></select>
+    </div>
+    <button class="btn-primary" id="btn-login">Entrar</button>
+    <div class="error-msg" id="login-error"></div>
+  </div>
+
+  <!-- PANTALLA 3: App principal -->
+  <div id="screen-main" class="screen hidden">
+    <header class="topbar">
+      <div class="proj" id="header-proj">Proyecto</div>
+      <div class="meta">
+        <span id="header-user">—</span>
+        <button class="gear" id="btn-settings">⚙</button>
+      </div>
+    </header>
+    <main id="content"></main>
+    <nav id="bottom-nav">
+      <button data-tab="proyecto" class="active"><span class="ic">🏗</span>Proyecto</button>
+      <button data-tab="fases"><span class="ic">▤</span>Fases</button>
+      <button data-tab="materiales"><span class="ic">📦</span>Materiales</button>
+      <button data-tab="contratistas"><span class="ic">☎</span>Contratistas</button>
+      <button data-tab="bitacora"><span class="ic">✎</span>Bitácora</button>
+    </nav>
+  </div>
+
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
