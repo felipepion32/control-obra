@@ -1,15 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap");
 
 :root {
-  --bg: #FAFAF7;
+  --bg: #FAFAFA;
   --surface: #FFFFFF;
   --ink: #1A1D29;
   --muted: #6B6F7A;
-  --navy: #2B4570;
-  --navy-dark: #1E314F;
-  --orange: #FF6B35;
-  --green: #3C8C5C;
-  --green-bg: #E3F1E8;
+  --navy: #004AAD;
+  --navy-dark: #00346E;
+  --orange: #2FAE4E;
+  --green: #2FAE4E;
+  --green-bg: #E3F4E8;
   --amber: #B8852B;
   --amber-bg: #FBF1DD;
   --red: #C84B31;
@@ -67,6 +67,7 @@ h1, h2, h3 {
 }
 
 .center-screen h1 { color: white; font-size: 30px; }
+.login-logo { width: 64px; height: 64px; border-radius: 12px; margin-bottom: 18px; }
 .center-screen p.eyebrow { color: var(--orange); margin-bottom: 4px; }
 .center-screen .desc { color: rgba(255,255,255,0.75); font-size: 14px; margin: 10px 0 28px; line-height: 1.5; }
 
@@ -139,6 +140,24 @@ header.topbar::after {
   opacity: 0.9;
 }
 header.topbar .proj { font-size: 19px; }
+.brand-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.brand-logo {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+}
+.brand-name {
+  font-family: "Barlow Condensed", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: rgba(255,255,255,0.8);
+}
 header.topbar .meta {
   display: flex;
   justify-content: space-between;
@@ -345,6 +364,7 @@ nav#bottom-nav button.active .ic { color: var(--orange); }
   padding: 20px 18px calc(env(safe-area-inset-bottom, 0px) + 20px);
 }
 .modal-sheet h3 { font-size: 17px; margin-bottom: 14px; }
+.desc-modal { font-size: 12.5px; color: var(--muted); margin: -8px 0 14px; line-height: 1.4; }
 .status-option {
   width: 100%;
   padding: 13px;

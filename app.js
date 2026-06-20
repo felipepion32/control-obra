@@ -372,10 +372,7 @@ function openDelayModal(fase) {
   backdrop.innerHTML = `
     <div class="modal-sheet">
       <h3>Reportar retraso — ${escapeHtml(fase.fase)}</h3>
-      <div class="field">
-        <label>Días de retraso</label>
-        <input type="number" id="input-dias-retraso" min="0" value="${fase.retraso || 0}">
-      </div>
+      <p class="desc-modal">Los días de retraso se calculan solos según la fecha planeada. Aquí solo explica el motivo.</p>
       <div class="field">
         <label>Motivo</label>
         <textarea id="input-motivo-retraso" placeholder="Ej. Lluvia, falta de material...">${escapeHtml(fase.motivoRetraso || "")}</textarea>
@@ -386,12 +383,11 @@ function openDelayModal(fase) {
   `;
   document.body.appendChild(backdrop);
   backdrop.querySelector("#btn-guardar-retraso").addEventListener("click", async () => {
-    const dias = document.getElementById("input-dias-retraso").value;
     const motivo = document.getElementById("input-motivo-retraso").value;
     backdrop.remove();
     try {
-      await apiPost("reportarRetraso", { proyecto: getSession().proyecto, id: fase.id, dias, motivo });
-      toast("Retraso reportado");
+      await apiPost("reportarRetraso", { proyecto: getSession().proyecto, id: fase.id, motivo });
+      toast("Motivo guardado");
       loadFases();
     } catch (e) {
       toast("Error: " + e.message);

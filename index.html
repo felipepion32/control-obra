@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Control de Obra</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#2B4570">
+<meta name="theme-color" content="#004AAD">
 <link rel="apple-touch-icon" href="icon-192.png">
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -27,6 +27,7 @@
 
   <!-- PANTALLA 2: Login (proyecto + nombre) -->
   <div id="screen-login" class="screen center-screen hidden">
+    <img src="icon-192.png" alt="Grupo Pión" class="login-logo">
     <p class="eyebrow">Control de Obra</p>
     <h1>Identifícate</h1>
     <p class="desc">Selecciona el proyecto y tu nombre para continuar.</p>
@@ -45,6 +46,10 @@
   <!-- PANTALLA 3: App principal -->
   <div id="screen-main" class="screen hidden">
     <header class="topbar">
+      <div class="brand-row">
+        <img src="icon-192.png" alt="Grupo Pión" class="brand-logo">
+        <span class="brand-name">GRUPO PIÓN</span>
+      </div>
       <div class="proj" id="header-proj">Proyecto</div>
       <div class="meta">
         <span id="header-user">—</span>

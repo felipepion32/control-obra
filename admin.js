@@ -15,6 +15,16 @@ function toast(msg) {
   setTimeout(() => el.classList.remove("show"), 2200);
 }
 
+async function apiGet(action, extraParams) {
+  const url = new URL(getBackendUrl());
+  url.searchParams.set("action", action);
+  Object.entries(extraParams || {}).forEach(([k, v]) => url.searchParams.set(k, v));
+  const res = await fetch(url.toString());
+  const data = await res.json();
+  if (data && data.error) throw new Error(data.error);
+  return data;
+}
+
 async function apiPost(action, payload) {
   const res = await fetch(getBackendUrl(), {
     method: "POST",
@@ -29,6 +39,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("btn-save-backend").addEventListener("click", onSaveBackend);
   document.getElementById("btn-crear").addEventListener("click", onCrear);
   document.getElementById("btn-change-backend").addEventListener("click", () => showScreen("screen-setup"));
+  document.getElementById("btn-ir-eliminar").addEventListener("click", onIrAEliminar);
+  document.getElementById("btn-ir-crear").addEventListener("click", () => showScreen("screen-admin"));
+  document.getElementById("btn-eliminar").addEventListener("click", onEliminar);
 
   if (!getBackendUrl()) {
     showScreen("screen-setup");
@@ -73,5 +86,47 @@ async function onCrear() {
   } finally {
     btn.disabled = false;
     btn.textContent = "Crear proyecto";
+  }
+}
+
+async function onIrAEliminar() {
+  showScreen("screen-delete");
+  const select = document.getElementById("select-eliminar");
+  select.innerHTML = '<option value="">Cargando...</option>';
+  try {
+    const proyectos = await apiGet("listProjects");
+    if (!proyectos.length) {
+      select.innerHTML = '<option value="">No hay proyectos creados</option>';
+      return;
+    }
+    select.innerHTML = proyectos.map((p) => `<option value="${p}">${p}</option>`).join("");
+  } catch (e) {
+    select.innerHTML = '<option value="">No se pudo cargar la lista</option>';
+  }
+}
+
+async function onEliminar() {
+  const nombre = document.getElementById("select-eliminar").value;
+  const clave = document.getElementById("input-clave-eliminar").value;
+  const errEl = document.getElementById("delete-error");
+  errEl.textContent = "";
+  if (!nombre || !clave) {
+    errEl.textContent = "Selecciona un proyecto y escribe la clave";
+    return;
+  }
+  if (!confirm(`¿Seguro que quieres eliminar "${nombre}"? El Sheet va a la papelera de Drive (recuperable 30 días).`)) return;
+  const btn = document.getElementById("btn-eliminar");
+  btn.disabled = true;
+  btn.textContent = "Eliminando…";
+  try {
+    await apiPost("eliminarProyecto", { nombre, clave });
+    toast("Proyecto eliminado");
+    document.getElementById("input-clave-eliminar").value = "";
+    onIrAEliminar();
+  } catch (e) {
+    errEl.textContent = e.message;
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Eliminar proyecto";
   }
 }

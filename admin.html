@@ -22,6 +22,7 @@
   </div>
 
   <div id="screen-admin" class="screen center-screen hidden">
+    <img src="icon-192.png" alt="Grupo Pión" class="login-logo">
     <p class="eyebrow">Solo administrador</p>
     <h1>Crear proyecto nuevo</h1>
     <p class="desc">Esto duplica tu Sheet Maestro automáticamente y lo deja listo para usar - no necesitas tocar Drive.</p>
@@ -40,6 +41,24 @@
       <a id="link-nuevo-sheet" href="#" target="_blank" class="btn-secondary" style="display:block; text-align:center; text-decoration:none; background:white;">Abrir el Sheet nuevo</a>
     </div>
     <button class="btn-secondary" id="btn-change-backend" style="margin-top:24px;">Cambiar URL del backend</button>
+    <button class="btn-secondary" id="btn-ir-eliminar" style="margin-top:10px;">Eliminar un proyecto →</button>
+  </div>
+
+  <div id="screen-delete" class="screen center-screen hidden">
+    <p class="eyebrow">Solo administrador</p>
+    <h1>Eliminar un proyecto</h1>
+    <p class="desc">Manda el Sheet a la papelera de Drive (recuperable 30 días) y lo quita del selector.</p>
+    <div class="field">
+      <label>Proyecto a eliminar</label>
+      <select id="select-eliminar"></select>
+    </div>
+    <div class="field">
+      <label>Clave de administrador</label>
+      <input type="password" id="input-clave-eliminar">
+    </div>
+    <button class="btn-primary" id="btn-eliminar" style="background:var(--red);">Eliminar proyecto</button>
+    <div class="error-msg" id="delete-error"></div>
+    <button class="btn-secondary" id="btn-ir-crear" style="margin-top:24px;">← Volver a crear proyecto</button>
   </div>
 
 </div>
